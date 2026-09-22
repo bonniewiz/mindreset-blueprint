@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview: The Asymmetric Media Engine | Node 1</title>
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* 1. GLOBAL ARCHITECTURE & GRID */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: #050A1F; 
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+      background-position: center top;
+      background-attachment: fixed;
+      color: #e0e6ed;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+    }
+
+    .preview-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .nav-back:hover { color: #00f0ff; transform: translateX(-5px); }
+
+    /* 2. HEADER SECTION */
+    .header-section {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #00f0ff;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .header-section h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+
+    .header-section h3 {
+      font-size: 1.25rem;
+      color: #a855f7;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 3. GLASSMORPHISM CONTENT BLOCKS */
+    .framework-block {
+      background-color: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .framework-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 240, 255, 0.05), transparent 60%);
+      pointer-events: none;
+    }
+
+    .block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+    }
+
+    .block-header i { color: #00f0ff; }
+
+    /* Text & Typography */
+    .framework-block p {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      text-align: justify;
+    }
+
+    .highlight-text {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Blueprint List */
+    .blueprint-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .blueprint-list li {
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .blueprint-list li i {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      color: #a855f7;
+      font-size: 1.2rem;
+    }
+
+    .blueprint-list strong {
+      color: #00f0ff;
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    /* Lab Sample Custom Formatting */
+    .lab-sample-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+      border-left: 3px solid rgba(168, 85, 247, 0.5);
+      padding-left: 25px;
+      margin-top: 30px;
+    }
+
+    /* 4. EXECUTION TRIGGER (CTA) */
+    .cta-container {
+      text-align: center;
+      margin-top: 60px;
+      padding: 40px;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.05) 100%);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+    }
+
+    .cta-container h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #ffffff;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .btn-amazon {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(90deg, #00f0ff, #a855f7);
+      color: #050811;
+      font-weight: 800;
+      padding: 16px 35px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 25px rgba(0, 240, 255, 0.25);
+    }
+
+    .btn-amazon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header-section h1 { font-size: 2.2rem; }
+      .framework-block { padding: 30px 20px; }
+      .block-header { font-size: 1.25rem; }
+      .btn-amazon { padding: 14px 20px; font-size: 0.95rem; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="preview-container">
+    <a href="library.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Return to The Library</a>
+    
+    <header class="header-section">
+      <div class="header-badge"><i class="fa-solid fa-microscope"></i> PREVIEW FRAMEWORK • SERIES BOOK 02</div>
+      <h1>The Asymmetric Media Engine</h1>
+      <h3>Architecting a YouTube System That Replaces Your Paycheck</h3>
+    </header>
+
+    <!-- PART 1: SYSTEM DIAGNOSTIC -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-microchip"></i> System Diagnostic</h2>
+      <p>The vast majority of creators approach YouTube as an unpredictable, creative gamble. They treat the platform like a personal vlog, relying on algorithmic luck, viral trends, and sheer exhaustion to grow. This is why 99% of creators eventually burn out without ever replacing their traditional income.</p>
+      <p>If you build a channel without systemic architecture, you are simply trading a corporate 9-to-5 for a digital 24/7. <span class="highlight-text">YouTube is not an entertainment platform—it is the world's most powerful top-of-funnel distribution network.</span> This manual provides the tactical blueprint to stop gambling on views and start engineering a media engine that functions as an automated army of digital employees.</p>
+    </section>
+
+    <!-- PART 2: THE ARCHITECTURAL BLUEPRINT -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-diagram-project"></i> The Architectural Blueprint</h2>
+      <p>This book is the definitive manual for Node 1 of the Triad Architecture. Inside, you will learn how to design, deploy, and scale a YouTube channel as a compounding business asset:</p>
+      
+      <ul class="blueprint-list">
+        <li>
+          <i class="fa-solid fa-video"></i>
+          <strong>Intentional Documentation</strong>
+          How to stop "vlogging" and start filtering your daily research and routines through an analytical lens to produce high-retention educational assets.
+        </li>
+        <li>
+          <i class="fa-solid fa-gears"></i>
+          <strong>The Production Pipeline</strong>
+          Assembling a streamlined, low-overhead media factory. Removing the friction from recording, editing, and publishing so you can scale output without burnout.
+        </li>
+        <li>
+          <i class="fa-solid fa-bullseye"></i>
+          <strong>Targeting Tier 1 High-CPM Niches</strong>
+          Why audience quality matters more than subscriber count. How to capture high-intent enterprise, tech, and wealth-building demographics for 10x ad yield.
+        </li>
+        <li>
+          <i class="fa-solid fa-road-bridge"></i>
+          <strong>The Financial Off-Ramp Protocol</strong>
+          The exact mathematical criteria and risk management framework required before you can safely walk away from your corporate payroll.
+        </li>
+      </ul>
+    </section>
+
+    <!-- PART 3: THE LAB SAMPLE (CHAPTER 1) -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-flask"></i> The Lab Sample: Chapter 01</h2>
+      <p><em>Step into the lab. Read the unedited opening sequence of the manual below.</em></p>
+      
+      <div class="lab-sample-text">
+        <p>Traditional employment is what we call a linear system. It operates on a strict one-to-one reward structure: you work for one hour, and you get paid for one hour. There is nothing you can do to change that output aside from waiting for a small pay raise, which is rarely enough.</p>
+        <p>YouTube, however, operates on an entirely different model. It is an asymmetrical system.</p>
+        <p>In an asymmetrical system, your input does not equal your capped output. When you put in the work to create properly researched and targeted videos, you are building digital assets. You produce a video today, and it lives on YouTube's servers, available around the clock. You can think of each successful video as an automated employee working on your behalf.</p>
+        <p>If you have 5, 50, 100, or 500 great videos performing on the platform, you have an entire fleet of automated employees working for you constantly. This is the definition of true leverage. Multiple videos generate income for you simultaneously, 24 hours a day, 7 days a week. By harnessing this architecture, you can eventually replace your paycheck and gain the freedom to grow your empire right from the comfort of your own home.</p>
+      </div>
+    </section>
+
+    <!-- PART 4: THE EXECUTION TRIGGER -->
+    <div class="cta-container">
+      <h2>The Blueprint is Drawn. It is Time to Build.</h2>
+      <a href="#" class="btn-amazon"><i class="fa-brands fa-amazon"></i> SECURE THE COMPLETE MANUAL ON AMAZON</a>
+    </div>
+
+  </main>
+
+</body>
+</html>

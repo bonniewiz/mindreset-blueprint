@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview: MindReset Architect | The Core Manifesto</title>
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* 1. GLOBAL ARCHITECTURE & GRID */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: #050A1F; 
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+      background-position: center top;
+      background-attachment: fixed;
+      color: #e0e6ed;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+    }
+
+    .preview-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .nav-back:hover { color: #00f0ff; transform: translateX(-5px); }
+
+    /* 2. HEADER SECTION */
+    .header-section {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #00f0ff;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .header-section h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+
+    .header-section h3 {
+      font-size: 1.25rem;
+      color: #a855f7;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 3. GLASSMORPHISM CONTENT BLOCKS */
+    .framework-block {
+      background-color: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .framework-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 240, 255, 0.05), transparent 60%);
+      pointer-events: none;
+    }
+
+    .block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+    }
+
+    .block-header i { color: #00f0ff; }
+
+    /* Text & Typography */
+    .framework-block p {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      text-align: justify;
+    }
+
+    .highlight-text {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Blueprint List */
+    .blueprint-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .blueprint-list li {
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .blueprint-list li i {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      color: #a855f7;
+      font-size: 1.2rem;
+    }
+
+    .blueprint-list strong {
+      color: #00f0ff;
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    /* Lab Sample Custom Formatting */
+    .lab-sample-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+      border-left: 3px solid rgba(168, 85, 247, 0.5);
+      padding-left: 25px;
+      margin-top: 30px;
+    }
+
+    /* 4. EXECUTION TRIGGER (CTA) */
+    .cta-container {
+      text-align: center;
+      margin-top: 60px;
+      padding: 40px;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.05) 100%);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 12px;
+    }
+
+    .cta-container h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #ffffff;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .btn-amazon {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(90deg, #00f0ff, #a855f7);
+      color: #050811;
+      font-weight: 800;
+      padding: 16px 35px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 25px rgba(0, 240, 255, 0.25);
+    }
+
+    .btn-amazon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .header-section h1 { font-size: 2.2rem; }
+      .framework-block { padding: 30px 20px; }
+      .block-header { font-size: 1.25rem; }
+      .btn-amazon { padding: 14px 20px; font-size: 0.95rem; width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="preview-container">
+    <a href="library.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Return to The Library</a>
+    
+    <header class="header-section">
+      <div class="header-badge"><i class="fa-solid fa-microscope"></i> PREVIEW FRAMEWORK • SERIES BOOK 01</div>
+      <h1>MindReset Architect</h1>
+      <h3>Escaping Linear Labor and Engineering Compounding Wealth</h3>
+    </header>
+
+    <!-- PART 1: THE DIAGNOSTIC HOOK -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-crosshairs"></i> The System Diagnostic</h2>
+      <p>Most of us live blindly inside legacy systems we didn't design. We follow rules and respect boundaries we didn't set, moving passively through an economic structure built by someone else's intelligence.</p>
+      <p>Consider the <span class="highlight-text">40-hour work week</span>. To most people, it feels like an immutable law of nature. In reality, it is a specific structural design from the industrial age. Remaining a passive component in that default structure ensures your financial and personal growth is permanently capped by its limits. This book is the manual to break that system and build your own.</p>
+    </section>
+
+    <!-- PART 2: THE ARCHITECTURAL BLUEPRINT -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-diagram-project"></i> The Architectural Blueprint</h2>
+      <p>This manifesto is not about generic motivation. It is a precise architectural breakdown of how to transition from an employee to a systems architect. Inside, you will master four core frameworks:</p>
+      
+      <ul class="blueprint-list">
+        <li>
+          <i class="fa-solid fa-layer-group"></i>
+          <strong>Phase 1: The Reality → Systems → Architecture Progression</strong>
+          Recognizing the difference between absolute physical laws and artificial, man-made economic boundaries.
+        </li>
+        <li>
+          <i class="fa-solid fa-chart-line"></i>
+          <strong>Phase 2: The Linear Labor Trap</strong>
+          The mathematical proof of why trading hours for a fixed wage places an absolute ceiling on your net worth, and how to detach from it.
+        </li>
+        <li>
+          <i class="fa-solid fa-arrows-spin"></i>
+          <strong>Phase 3: The Continuous Growth Engine</strong>
+          The closed operational loop: Learn → Research → Discover Problems → Build → Document → Teach.
+        </li>
+        <li>
+          <i class="fa-solid fa-network-wired"></i>
+          <strong>Phase 4: The Triad Architecture</strong>
+          Why interlocking YouTube (Distribution), Books (Authority IP), and Apps (Leverage) creates an inescapable orbit of compounding wealth.
+        </li>
+      </ul>
+    </section>
+
+    <!-- PART 3: THE LAB SAMPLE (CHAPTER 1) -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-flask"></i> The Lab Sample: Chapter 01</h2>
+      <p><em>Step into the lab. Read the unedited opening sequence of the manifesto below.</em></p>
+      
+      <div class="lab-sample-text">
+        <p>Reality is a web of interconnected systems. The economy, the biological mind, even a forest. They follow natural, predictable behaviors.</p>
+        <p>But when human intelligence intervenes to design, arrange, or rebuild those systems, architecture emerges.</p>
+        <p>Engineers classify traditional employment as a linear system, relying on a strict one-to-one exchange. You input 1 hour of time and the system outputs one unit of money. This design has a hard ceiling. Your output is strictly capped by physical stamina and a 24-hour day. Attempting to work harder within this model is like trying to fix a structural defect with brute force. You aren't changing the result. You're just accelerating the wear on the engine.</p>
+        <p>Scalable freedom requires an asymmetric revenue system. In this architecture, you build an asset once and it operates independently, generating value around the clock without your physical presence. True leverage isn't found in harder work. It's found in engineering a new machine where the rewards no longer correlate to your hourly input.</p>
+      </div>
+    </section>
+
+    <!-- PART 4: THE EXECUTION TRIGGER -->
+    <div class="cta-container">
+      <h2>The Blueprint is Drawn. It is Time to Build.</h2>
+      <a href="#" class="btn-amazon"><i class="fa-brands fa-amazon"></i> SECURE THE COMPLETE SYSTEM ON AMAZON</a>
+    </div>
+
+  </main>
+
+</body>
+</html>

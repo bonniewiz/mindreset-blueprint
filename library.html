@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Architect's Library | MindReset</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* 1. GLOBAL & GRID BACKGROUND */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: #050A1F; 
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+      background-position: center top;
+      background-attachment: fixed;
+      color: #e0e6ed;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    .storefront-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 35px;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .nav-back:hover { color: #00f0ff; transform: translateX(-5px); }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #00f0ff;
+      text-transform: uppercase;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      background: rgba(0, 240, 255, 0.08);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .header-section h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .header-section h1 span {
+      color: #00f0ff;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.55);
+    }
+
+    .header-section p {
+      font-size: 1.1rem;
+      color: #b0c4de;
+      max-width: 720px;
+      margin: 0 auto 25px;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+      padding: 16px 20px;
+      background: rgba(10, 14, 26, 0.6);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      border-radius: 10px;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .stat-item i {
+      color: #00f0ff;
+      font-size: 1.1rem;
+    }
+
+    .stat-item strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* 3. CATEGORY FILTER TABS */
+    .filter-wrapper {
+      margin-bottom: 45px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      background: rgba(10, 14, 26, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      color: #94a3b8;
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      color: #00f0ff;
+      border-color: rgba(0, 240, 255, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(90deg, rgba(0, 240, 255, 0.2), rgba(168, 85, 247, 0.2));
+      border-color: #00f0ff;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+    }
+
+    /* 4. SECTION DIVIDERS */
+    .library-section-header {
+      margin: 50px 0 30px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .library-section-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .library-section-header h2 i { color: #00f0ff; }
+
+    .library-section-header .section-tag {
+      font-size: 0.8rem;
+      color: #a855f7;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 5. GLASSMORPHISM BOOK CARDS */
+    .book-card {
+      background-color: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 14px;
+      padding: 35px;
+      display: flex;
+      gap: 35px;
+      margin-bottom: 35px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    
+    .book-card:hover {
+      border-color: rgba(0, 240, 255, 0.45);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .book-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 240, 255, 0.06), transparent 50%);
+      pointer-events: none;
+    }
+
+    .book-card.featured-card {
+      border: 1.5px solid rgba(0, 240, 255, 0.45);
+      background: linear-gradient(135deg, rgba(10, 18, 38, 0.9) 0%, rgba(10, 14, 26, 0.85) 100%);
+    }
+
+    .book-card.featured-card::after {
+      content: 'STRATEGIC CORE';
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #00f0ff;
+      letter-spacing: 1.5px;
+      padding: 3px 8px;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      border-radius: 4px;
+      background: rgba(0, 240, 255, 0.1);
+    }
+
+    .cover-container {
+      width: 210px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 1 / 1.5;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(0, 240, 255, 0.35);
+      background: #080d1e;
+    }
+
+    /* Dynamic CSS Blueprint Cover */
+    .cyber-cover {
+      width: 100%;
+      aspect-ratio: 1 / 1.5;
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(0, 240, 255, 0.35);
+      background: linear-gradient(145deg, #070d24 0%, #030612 100%);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .cyber-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+      background-size: 15px 15px;
+      pointer-events: none;
+    }
+
+    .cover-top-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #00f0ff;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .cover-icon-wrap {
+      margin: 15px auto;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      background: rgba(0, 240, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #00f0ff;
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+      z-index: 1;
+    }
+
+    .cover-main-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.25;
+      letter-spacing: 0.5px;
+      z-index: 1;
+      margin-bottom: 5px;
+    }
+
+    .cover-sub-label {
+      font-size: 0.65rem;
+      color: #a855f7;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+      z-index: 1;
+    }
+
+    .cover-author-tag {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 1;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 8px;
+    }
+
+    .book-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .node-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #00f0ff;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 2px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .status-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #a855f7;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 2px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .author-line {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .author-line span { color: #e2e8f0; font-weight: 600; }
+
+    .book-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.85rem;
+      color: #ffffff;
+      font-weight: 800;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .book-subtitle {
+      color: #a855f7;
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .book-description {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+      text-align: justify;
+      line-height: 1.65;
+    }
+
+    .chapter-details {
+      margin-bottom: 22px;
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      border-radius: 8px;
+      background: rgba(5, 10, 31, 0.5);
+      padding: 10px 14px;
+    }
+
+    .chapter-details summary {
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #00f0ff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      outline: none;
+    }
+
+    .chapter-details summary:hover { color: #ffffff; }
+
+    .chapter-list {
+      margin-top: 12px;
+      padding-left: 20px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chapter-list li { line-height: 1.45; }
+    .chapter-list strong { color: #ffffff; }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-amazon {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(90deg, #00f0ff, #a855f7);
+      color: #050811;
+      font-weight: 800;
+      padding: 11px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-amazon:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 240, 255, 0.4);
+    }
+
+    .btn-blueprint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: #00f0ff;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-blueprint:hover {
+      background: rgba(0, 240, 255, 0.25);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-upcoming {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      color: #c084fc;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+    }
+
+    .storefront-footer {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 240, 255, 0.15);
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+
+    .storefront-footer a { color: #00f0ff; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .storefront-container { padding: 40px 15px; }
+      .header-section h1 { font-size: 2.1rem; }
+      .book-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 28px 18px;
+        gap: 25px;
+      }
+      .cover-container { width: 180px; }
+      .book-description { text-align: left; }
+      .badge-row { justify-content: center; }
+      .btn-row { justify-content: center; }
+      .chapter-details { text-align: left; }
+    }
+	@keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-5px); }
+      60% { transform: translateY(-3px); }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="storefront-container">
+    <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Return to Master Blueprint</a>
+    
+    <header class="header-section">
+      <div class="header-badge"><i class="fa-solid fa-shield-halved"></i> Proprietary IP Ecosystem</div>
+      <h1>The Architect's <span>Library</span></h1>
+      <p>Secure the codified intellectual property of the MindReset Architect ecosystem. These manuals contain the exact structural blueprints to engineer asymmetric digital assets, eliminate operational friction, and escape the linear labor trap.</p>
+      
+      <div class="stats-bar">
+        <div class="stat-item"><i class="fa-solid fa-book-bookmark"></i> <strong id="dynamic-book-count">...</strong>&nbsp;Codified Manuals & Outlines</div>
+        <div class="stat-item"><i class="fa-solid fa-diagram-project"></i> <strong>3</strong> Interlocking Triad Nodes</div>
+        <div class="stat-item"><i class="fa-solid fa-microchip"></i> <strong>100%</strong> Systems Architecture</div>
+      </div>
+    </header>
+
+    <!-- FILTER BAR -->
+    <div class="filter-wrapper">
+      <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Publications</button>
+      <button class="filter-btn" data-filter="architect-series"><i class="fa-solid fa-cube"></i> MindReset Architect Series</button>
+      <button class="filter-btn" data-filter="wealth-engineering"><i class="fa-solid fa-chart-line"></i> Wealth & Capital Engineering</button>
+      <button class="filter-btn" data-filter="personal-finance"><i class="fa-solid fa-wallet"></i> Personal Finance & Automation</button>
+      <button class="filter-btn" data-filter="systems-mindset"><i class="fa-solid fa-brain"></i> Cognition & Focus Systems</button>
+      <button class="filter-btn" data-filter="business-ops"><i class="fa-solid fa-truck-fast"></i> Non-Asset Business Operations</button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: THE MINDRESET ARCHITECT SERIES  -->
+    <!-- ========================================== -->
+    <div class="library-section-header" data-category="architect-series">
+      <h2><i class="fa-solid fa-network-wired"></i> MindReset Architect Series (The Core Ecosystem)</h2>
+      <span class="section-tag">Strategic Anchor Books & Tactical Manuals</span>
+    </div>
+
+    <!-- ENTRY ASSET: The MindReset Architect System™ PDF -->
+    <article class="book-card featured-card" data-category="architect-series">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">The Entry Point</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-compass-drafting"></i></div>
+          <div>
+            <div class="cover-main-title">The MindReset Architect System™</div>
+            <div class="cover-sub-label">Lead Magnet & Master Blueprint</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-star"></i> Ecosystem Entry Point</span>
+          <span class="status-badge">Proprietary Blueprint PDF</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect</div>
+        <h2 class="book-title">The MindReset Architect System™</h2>
+        <h3 class="book-subtitle">Turning Learning, Research, and Problem-Solving into Compounding Businesses</h3>
+        <p class="book-description">The foundational entry asset of the entire MindReset ecosystem. This concise, high-impact blueprint details the philosophy that everything in reality is architecture. Learn how to break free from passive 40-hour industrial default rules and execute the Continuous Growth Engine to transform daily curiosities into proprietary digital assets.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Core Architecture Breakdown</summary>
+          <ul class="chapter-list">
+            <li><strong>Blueprint 01: The Core Philosophy:</strong> Moving from passive component to systems architect. Escaping industrial-era defaults.</li>
+            <li><strong>Blueprint 02: The Triad Architecture:</strong> Interlocking Node 1 (YouTube Distribution), Node 2 (Books & Authority IP), and Node 3 (Software & App Leverage).</li>
+            <li><strong>Blueprint 03: The Continuous Growth Engine™:</strong> The closed operational loop (Learn & Research → Discover Problems → Build Solutions → Document & Teach).</li>
+          </ul>
+        </details>
+
+        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0, 240, 255, 0.15); display: flex; align-items: center; gap: 10px; color: #a855f7; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px;">
+          <i class="fa-solid fa-arrow-down-long" style="color: #00f0ff; animation: bounce 2s infinite;"></i> 
+          Proceed below to secure Series Book 01
+        </div>
+      </div>
+    </article>
+
+    <!-- ARCHITECT SERIES BOOK 1: The Core Manifesto -->
+    <article class="book-card featured-card" data-category="architect-series">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Series Book 01</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <div>
+            <div class="cover-main-title">MindReset Architect</div>
+            <div class="cover-sub-label">The Core Manifesto</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-anchor"></i> Anchor Book</span>
+          <span class="status-badge">Core Philosophy</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">MindReset Architect</h2>
+        <h3 class="book-subtitle">Escaping Linear Labor and Engineering Compounding Wealth</h3>
+        <p class="book-description">The flagship manifesto that expands the lead magnet into a definitive treatise. It guides the reader through the philosophical transition from living inside broken legacy systems (trading hours for a capped wage) to becoming an active systems architect who constructs self-sustaining digital assets that compound independently of physical labor.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Key Frameworks & Chapters</summary>
+          <ul class="chapter-list">
+            <li><strong>The Reality → Systems → Architecture Progression:</strong> Recognizing artificial boundaries vs. physical laws.</li>
+            <li><strong>The Linear Labor Trap:</strong> The mathematical proof of why hourly wages and salaries place an absolute ceiling on net worth.</li>
+            <li><strong>The Continuous Growth Engine:</strong> A step-by-step methodology for converting research and trial into permanent IP.</li>
+            <li><strong>The Triad Moat:</strong> Why combining YouTube, Books, and Software creates an inescapable orbit of value and platform immunity.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-mindreset-architect.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-mindreset-architect.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ARCHITECT SERIES BOOK 2: Node 1 Distribution Manual -->
+    <article class="book-card" data-category="architect-series">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Series Book 02</div>
+          <div class="cover-icon-wrap"><i class="fa-brands fa-youtube"></i></div>
+          <div>
+            <div class="cover-main-title">The Asymmetric Media Engine</div>
+            <div class="cover-sub-label">Node 1: Distribution Manual</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-satellite-dish"></i> Node 1: Distribution</span>
+          <span class="status-badge">Tactical Manual</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Asymmetric Media Engine</h2>
+        <h3 class="book-subtitle">Architecting a YouTube System That Replaces Your Paycheck</h3>
+        <p class="book-description">A tactical blueprint for transforming YouTube from an unpredictable creative gamble into an automated army of 24/7 digital employees. Focuses on intentional documentation, analytical filtering, optimizing for Tier 1 high-CPM niches (systems, finance, tech), and executing an orderly financial off-ramp to exit full-time employment safely.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Key Frameworks & Chapters</summary>
+          <ul class="chapter-list">
+            <li><strong>Intentional Documentation:</strong> Filtering personal experiments through an analytical lens to produce timeless evergreen assets.</li>
+            <li><strong>The Research & Production Pipelines:</strong> Assembling a streamlined, low-overhead media production factory.</li>
+            <li><strong>Targeting Tier 1 High-CPM Niches:</strong> Capturing high-intent enterprise and wealth-building audiences for 10x ad yield.</li>
+            <li><strong>The Financial Off-Ramp Protocol:</strong> The exact mathematical criteria required before walking away from corporate payroll.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-asymmetric-media-engine.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-asymmetric-media-engine.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ARCHITECT SERIES BOOK 3: Node 3 Leverage Manual -->
+    <article class="book-card" data-category="architect-series">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Series Book 03</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-code"></i></div>
+          <div>
+            <div class="cover-main-title">The AI Accelerator</div>
+            <div class="cover-sub-label">Node 3: Software Leverage</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-laptop-code"></i> Node 3: Software Leverage</span>
+          <span class="status-badge">Tactical Manual</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The AI Accelerator</h2>
+        <h3 class="book-subtitle">Vibe Coding and Building Software Empires Without a CS Degree</h3>
+        <p class="book-description">Democratizing code for high-leverage builders. This manual illustrates how to collapse the latency between identifying an operational friction point and deploying a working software application. Harnessing open-source computer science curricula and modern AI tools, builders can engineer compounding software assets with near-zero marginal reproduction cost.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Key Frameworks & Chapters</summary>
+          <ul class="chapter-list">
+            <li><strong>The End of the Traditional Coder:</strong> The mechanics of vibe coding, prompt-based architecture, and agile prototyping.</li>
+            <li><strong>Self-Taught Tech Stack:</strong> Leveraging open courseware (MIT, Harvard) paired with AI acceleration models.</li>
+            <li><strong>Prototyping & Rapid Deployment:</strong> Setting up modern hosting, databases, and micro-SaaS infrastructures with AI.</li>
+            <li><strong>Solving High-Margin Problems:</strong> Building targeted tools that solve niche business pain points and generate recurring cash flow.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-ai-accelerator.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-ai-accelerator.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ARCHITECT SERIES BOOK 4: Internal Discipline OS -->
+    <article class="book-card" data-category="architect-series">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Series Book 04</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-brain"></i></div>
+          <div>
+            <div class="cover-main-title">The Internal Discipline Engine</div>
+            <div class="cover-sub-label">Psychological Operating System</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-shield-virus"></i> Internal Architecture</span>
+          <span class="status-badge">Psychological OS</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Internal Discipline Engine</h2>
+        <h3 class="book-subtitle">Engineering the Focus to Build Empires</h3>
+        <p class="book-description">You cannot build scalable external empires if your internal operating system is riddled with friction. This book maps out the psychological architecture required to sustain focus in 'The Lab.' It replaces fragile willpower with environmental design, explains the neurobiology of deep work, and turns teaching into the ultimate retention mechanism.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Key Frameworks & Chapters</summary>
+          <ul class="chapter-list">
+            <li><strong>Systems Thinking for the Mind:</strong> Treating human attention as a finite hardware resource that requires strict gating.</li>
+            <li><strong>Focus Transmission & Consistency Output:</strong> Overcoming biological resistance and sustaining deep work rhythms.</li>
+            <li><strong>Teaching to Learn:</strong> Why documenting processes publicly creates insurmountable cognitive retention and authority.</li>
+            <li><strong>Frictionless Environmental Design:</strong> Designing physical and digital workspaces that make execution automatic.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-internal-discipline-engine.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-internal-discipline-engine.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- ======================================================= -->
+    <!-- SECTION 2: THE 11 SPECIALIZED PUBLICATIONS & BLUEPRINTS -->
+    <!-- ======================================================= -->
+    <div class="library-section-header" data-category="wealth-engineering">
+      <h2><i class="fa-solid fa-vault"></i> Capital, Wealth & Asymmetric Systems</h2>
+      <span class="section-tag">Codified Manuals & Advanced Manuscripts</span>
+    </div>
+
+    <!-- BOOK 11: The Leverage Equation -->
+    <article class="book-card featured-card" data-category="wealth-engineering">
+      <div class="cover-container">
+        <img src="images/cover-leverage.jpg" alt="The Leverage Equation Cover" class="book-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cyber-cover" style="display:none;">
+          <div class="cover-top-tag">Book 11 • Flagship</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div>
+            <div class="cover-main-title">The Leverage Equation</div>
+            <div class="cover-sub-label">Capital & Systems</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-crown"></i> Flagship Manual</span>
+          <span class="status-badge">Complete 10-Chapter Manuscript</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Leverage Equation</h2>
+        <h3 class="book-subtitle">How to Deploy Capital, Asymmetric Debt, and Scalable Systems to Build Wealth Without Downside Risk</h3>
+        <p class="book-description">The premier manual on modern capital allocation and mechanical leverage. Deconstructs the linear math trap (1 hour = $X) and unpacks the Anatomy of the Fulcrum across the four levers of scale: capital, labor, operational systems, and zero-marginal-cost media/code. Implements the Tri-Filter Leverage Equation to build compounding assets while strictly confining downside exposure.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Complete 10-Chapter Architecture</summary>
+          <ul class="chapter-list">
+            <li><strong>Chapter 1: The Linear Math Trap:</strong> The arithmetic limits of labor, debt conflation myth, and personal leverage audit.</li>
+            <li><strong>Chapter 2: Anatomy of the Fulcrum:</strong> The four structural levers of scale and the compounding stack.</li>
+            <li><strong>Chapter 3: Positive Spread Condition:</strong> The cost of capital law and overcoming duration mismatches.</li>
+            <li><strong>Chapter 4: The Liquidity Trap:</strong> Solvency management and mitigating margin call risks.</li>
+            <li><strong>Chapter 5: Filter 1 — Positive Carry & DSCR:</strong> Stress-testing cash flow safety margins.</li>
+            <li><strong>Chapter 6: Filter 2 — Downside Confinement:</strong> Non-recourse debt, collateral insulation, and legal moats.</li>
+            <li><strong>Chapter 7: Filter 3 — Inflation Arbitrage:</strong> Positioning long-term fixed debt as a short on fiat currency.</li>
+            <li><strong>Chapter 8: Financial Leverage in Practice:</strong> Asset-backed acquisitions and programmatic cash recycling.</li>
+            <li><strong>Chapter 9: Zero-Marginal-Cost Multipliers:</strong> Multiplying capital through permissionless code and media.</li>
+            <li><strong>Chapter 10: Master Allocator's Operating System:</strong> Institutional audits, triggers, and capital governance.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-leverage-equation.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-leverage-equation.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 3: The Seven Laws of Wealth Engineering -->
+    <article class="book-card" data-category="wealth-engineering">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 03</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-gavel"></i></div>
+          <div>
+            <div class="cover-main-title">Seven Laws of Wealth</div>
+            <div class="cover-sub-label">Wealth Engineering</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-gears"></i> Core Laws</span>
+          <span class="status-badge">Complete 11-Chapter Manuscript</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Seven Laws of Wealth Engineering</h2>
+        <h3 class="book-subtitle">Mastering the System of Money: Momentum, Structure, and Asymmetry</h3>
+        <p class="book-description">Tears out the rusted middle-class rulebook and replaces it with the unbreakable physical laws of capital. Built around three master pillars: Momentum, Structure, and Asymmetry. Provides the exact 5-Question Wealth Filter to eliminate Shiny Object Syndrome and navigate the Crossover Point where passive machine yields exceed living costs.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 11-Chapter Master Structure</summary>
+          <ul class="chapter-list">
+            <li><strong>Chapter 1 & 2: The Stagnant Scoreboard:</strong> Rules vs. Laws and adopting the engineer's mindset.</li>
+            <li><strong>Chapter 3: Law 1 — Time-Holding Paradox:</strong> Why holding outperforms trading and how momentum compounds.</li>
+            <li><strong>Chapter 4: Law 2 — Power of the Buyer:</strong> Shifting out of the employee role to control the terms of engagement.</li>
+            <li><strong>Chapter 5: Law 3 — Speed of the Output:</strong> Removing cycle lag from execution to capitalize on market windows.</li>
+            <li><strong>Chapter 7: Law 5 — Asymmetrical Engineering:</strong> Structuring capped downside with mathematically infinite upside.</li>
+            <li><strong>Chapter 8: Law 6 — Don't Bet the Empire:</strong> The mathematics of bet sizing and constructing structural moats.</li>
+            <li><strong>Chapter 9: Law 7 — The Diversification Myth:</strong> Diversification as an ignorance hedge vs. operator concentration.</li>
+            <li><strong>Chapter 10: The Wealth Engineer's Filter:</strong> The automated 5-question diagnostic checklist.</li>
+            <li><strong>Chapter 11: The Exponential Life:</strong> Reaching the Crossover Point and managing true sovereignty.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-seven-laws-of-wealth.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-seven-laws-of-wealth.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 7: The Wealth Algorithm: Real Estate Edition -->
+    <article class="book-card" data-category="wealth-engineering">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 07</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-building-shield"></i></div>
+          <div>
+            <div class="cover-main-title">The Wealth Algorithm</div>
+            <div class="cover-sub-label">Real Estate Edition</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-city"></i> Real Estate Systems</span>
+          <span class="status-badge">Complete Technical Manuscript</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Wealth Algorithm: Real Estate Edition</h2>
+        <h3 class="book-subtitle">Systematizing Capital Allocation for the Passive Investor</h3>
+        <p class="book-description">Real estate is not an emotional lifestyle or landlord hobby; it is a high-latency, high-yield data processing machine. This manual decouples the investor from property management through GP/LP syndication models, enforcing a strict binary underwriting filter (1.25x DSCR floor), cost segregation studies, bonus depreciation, and 1031-to-DST tax-deferred compounding velocity.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Algorithmic Real Estate Architecture</summary>
+          <ul class="chapter-list">
+            <li><strong>Chapter 1: The Capital Allocation Paradigm Shift:</strong> The Velocity Metric (V), tax-efficiency matrix, and the PAL trap.</li>
+            <li><strong>Chapter 2: Algorithmic Underwriting & DSCR:</strong> 1.25x institutional floor, 5-step stress test against rate volatility, and binary discard rules.</li>
+            <li><strong>Chapter 3: Tax-Shielded Depreciation & PAL Harvesting:</strong> Cost segregation frameworks and bonus depreciation mechanics.</li>
+            <li><strong>Advanced Asset Protection:</strong> Deploying Master and Series LLCs to isolate operational litigation risks per property.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-wealth-algorithm.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-wealth-algorithm.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 9: The Self-Directed IRA Wealth Engine -->
+    <article class="book-card" data-category="wealth-engineering">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 09</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-sack-dollar"></i></div>
+          <div>
+            <div class="cover-main-title">Self-Directed IRA</div>
+            <div class="cover-sub-label">Wealth Engine</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-file-shield"></i> Tax-Free Compounding</span>
+          <span class="status-badge">Complete Technical Manual</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Self-Directed IRA Wealth Engine</h2>
+        <h3 class="book-subtitle">Tax-Free Compounding: Architecting Tax-Exempt Real Estate Portfolios</h3>
+        <p class="book-description">A rigorous blueprint for high-net-worth investors seeking to decouple retirement capital from public market volatility and destructive tax drag. Details the implementation of Checkbook Control LLCs, navigating IRC Section 4975 prohibited transactions, leveraging non-recourse debt, and neutralizing UDFI liabilities to compound private real estate syndication yields tax-free.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Technical Structuring Modules</summary>
+          <ul class="chapter-list">
+            <li><strong>The Tax Drag Equation:</strong> Mathematical modeling of 401(k)/traditional IRA vs. tax-exempt SDIRA IRR.</li>
+            <li><strong>Checkbook Control LLC Architecture:</strong> Bypassing custodial gatekeepers for real-time private equity deployment.</li>
+            <li><strong>IRC Section 4975 Compliance:</strong> The exact protocols to prevent disqualifying transactions and preserve tax status.</li>
+            <li><strong>Non-Recourse Leverage & UDFI Mitigation:</strong> Using entity structuring to borrow without personal liability while minimizing taxes.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-self-directed-ira.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-self-directed-ira.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: PERSONAL FINANCE & AUTOMATION   -->
+    <!-- ========================================== -->
+    <div class="library-section-header" data-category="personal-finance">
+      <h2><i class="fa-solid fa-sliders"></i> Personal Finance & Automated Plumbing</h2>
+      <span class="section-tag">Zero-Friction Behavioral Systems</span>
+    </div>
+
+    <!-- BOOK 10: Money on Autopilot -->
+    <article class="book-card featured-card" data-category="personal-finance">
+      <div class="cover-container">
+        <img src="images/cover-autopilot.png" alt="Money on Autopilot Cover" class="book-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cyber-cover" style="display:none;">
+          <div class="cover-top-tag">Book 10 • KDP Ready</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <div class="cover-main-title">Money On Autopilot</div>
+            <div class="cover-sub-label">Budget-Free System</div>
+          </div>
+          <div class="cover-author-tag">Wanga & Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-bolt"></i> Automated Architecture</span>
+          <span class="status-badge">Full Blueprint & Cover Mockups</span>
+        </div>
+        <div class="author-line">By <span>Judith Mbinya Wanga</span> & <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">Money on Autopilot</h2>
+        <h3 class="book-subtitle">The Budget-Free Wealth System: How to Escape the Spreadsheet Trap and Eliminate Decision Fatigue</h3>
+        <p class="book-description">Stop tracking expenses. Start automating your freedom. Line-item budgeting apps fail 90% of busy professionals because logging past purchases does nothing to alter future behavior. This manual installs digital financial plumbing that routes paychecks at the employer direct deposit source into Three Psychological Buckets, making bill-paying friction and accidental overspending obsolete.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 11-Chapter Automation Blueprint</summary>
+          <ul class="chapter-list">
+            <li><strong>Chapter 1 & 2: The Spreadsheet Trap:</strong> Decision fatigue and deconstructing the impulse-spending guilt cycle.</li>
+            <li><strong>Chapter 3: The Automation Epiphany:</strong> Reversing bank fee structures to work in your favor.</li>
+            <li><strong>Chapter 4: The Three-Bucket Blueprint:</strong> Fixed Operations, Wealth Engines, and Guilt-Free Play accounts.</li>
+            <li><strong>Chapter 5: Digital Plumbing 101:</strong> Splitting direct deposits at the payroll source before money hits checking.</li>
+            <li><strong>Chapter 6: The Overdraft Shield:</strong> The 1-Month Buffer method and aligning billing cycles.</li>
+            <li><strong>Chapters 7–11: Invisible Compounding:</strong> Hands-off index fund contributions and frictionless living.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-money-on-autopilot.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-money-on-autopilot.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 1: Wealth After 40 -->
+    <article class="book-card" data-category="personal-finance">
+      <div class="cover-container">
+        <img src="images/cover-wealth-after-40.png" alt="Wealth After 40 Cover" class="book-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cyber-cover" style="display:none;">
+          <div class="cover-top-tag">Book 01 • Complete</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
+          <div>
+            <div class="cover-main-title">Wealth After 40</div>
+            <div class="cover-sub-label">Calm Financial Stability</div>
+          </div>
+          <div class="cover-author-tag">Wanga & Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-shield-heart"></i> Stability Architecture</span>
+          <span class="status-badge">Full Audiobook & Manuscript</span>
+        </div>
+        <div class="author-line">By <span>Judith Mbinya Wanga</span> & <span>Boniface Mutua Muthini</span> | MindReset Books</div>
+        <h2 class="book-title">Wealth After 40</h2>
+        <h3 class="book-subtitle">A Calm, Realistic Path to Financial Stability When Time Feels Short</h3>
+        <p class="book-description">A compassionate, mathematically sound roadmap for midlife professionals who feel they missed the starting gun. Eliminates financial shame, deconstructs the 'Start Early' myth, and reframes 'lateness' into experienced location. Focuses on peace, debt quarantine, emergency liquidity cushions, and steady, risk-protected compounding.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Core Modules & Chapters</summary>
+          <ul class="chapter-list">
+            <li><strong>Chapter 1: Letting Go of Financial Regret:</strong> Why regret feels heavier after 40 and how shame paralyzes action.</li>
+            <li><strong>Chapter 2: The Lie of the Perfect Financial Timeline:</strong> Challenging linear narratives and normalizing real-life disruptions.</li>
+            <li><strong>Part II: Rebuilding the Baseline:</strong> Calculating your true baseline, insulating against emergencies, and debt triage.</li>
+            <li><strong>Part III: Sustainable Stability:</strong> Automated low-volatility investing and creating multi-decade dignity.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-wealth-after-40.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-wealth-after-40.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 2: The Wealth Routine -->
+    <article class="book-card" data-category="personal-finance">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 02</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <div>
+            <div class="cover-main-title">The Wealth Routine</div>
+            <div class="cover-sub-label">Habits Over Knowledge</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-repeat"></i> Behavioral Routines</span>
+          <span class="status-badge">Production Blueprint</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Wealth Routine</h2>
+        <h3 class="book-subtitle">Financial Habits Over Knowledge: Mastering the Daily Protocols of Compounding</h3>
+        <p class="book-description">Proves that information without operational habits is mere entertainment. Outlines the practical daily, weekly, and monthly rituals that protect capital, curb lifestyle inflation, and enforce programmatic allocation. Engineered to turn financial maintenance from an exhausting cognitive chore into a seamless background ritual.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> Routine Architecture</summary>
+          <ul class="chapter-list">
+            <li><strong>The Friction Management Protocol:</strong> Lowering the effort required to save and raising barriers to spend.</li>
+            <li><strong>The Weekly Wealth Audit:</strong> A 15-minute diagnostic protocol to verify digital plumbing efficiency.</li>
+            <li><strong>Decoupling Identity from Consumption:</strong> Retaining wealth margin as personal income scales.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-wealth-routine.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-wealth-routine.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- ========================================== -->
+    <!-- SECTION 4: COGNITION, FOCUS & PHILOSOPHY   -->
+    <!-- ========================================== -->
+    <div class="library-section-header" data-category="systems-mindset">
+      <h2><i class="fa-solid fa-brain"></i> Cognition, Deep Work & Societal Architecture</h2>
+      <span class="section-tag">High-Performance Biological & Mental Systems</span>
+    </div>
+
+    <!-- BOOK 5: Built for Focus -->
+    <article class="book-card" data-category="systems-mindset">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 05</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-bullseye"></i></div>
+          <div>
+            <div class="cover-main-title">Built For Focus</div>
+            <div class="cover-sub-label">Deep Work Architecture</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-crosshairs"></i> Cognitive Systems</span>
+          <span class="status-badge">Comprehensive 10-Chapter Blueprint</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">Built for Focus</h2>
+        <h3 class="book-subtitle">A Systems Thinking Approach to Overcome Self-Sabotage and Reclaim Peak Productivity</h3>
+        <p class="book-description">Procrastination is an environmental engineering failure, not a moral defect. Introducing the Friction Inversion Protocol: making deep work chemically and mechanically frictionless while injecting physical barriers into distraction. Details the Asynchronous Firewall, the 24-Hour Buffer Rule, hardware isolation, and bypassing the 23-minute context-switching penalty.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 5-Phase Transformation Outline</summary>
+          <ul class="chapter-list">
+            <li><strong>Chapter 1 & 2: Evolutionary Defense Mechanisms:</strong> Deconstructing procrastination and the 23-minute context-switching penalty.</li>
+            <li><strong>Chapter 3 & 4: The Physics of Action:</strong> Friction inversion and resetting baseline dopamine thresholds.</li>
+            <li><strong>Chapter 5: The Asynchronous Firewall:</strong> The 24-Hour Buffer Rule and batch-processing windows.</li>
+            <li><strong>Chapter 6 & 7: Hardware & Environment Isolation:</strong> Separating creation hardware from consumption hardware.</li>
+            <li><strong>Chapter 8–10: Micro-Scaling the Dread Wall:</strong> Reducing start-thresholds to under 120 seconds to achieve immediate momentum.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-built-for-focus.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-built-for-focus.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 6: The Cognitive Vitality Blueprint -->
+    <article class="book-card" data-category="systems-mindset">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 06</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-dna"></i></div>
+          <div>
+            <div class="cover-main-title">Cognitive Vitality</div>
+            <div class="cover-sub-label">Brain Longevity Protocol</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-heart-pulse"></i> Biological Architecture</span>
+          <span class="status-badge">Full Architecture & Habit Protocol</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Cognitive Vitality Blueprint</h2>
+        <h3 class="book-subtitle">A Science-Backed Protocol to Protect Your Brain and Delay Decline</h3>
+        <p class="book-description">A precision-prevention manual engineered to sustain biological brain sharpness and mitigate neurodegenerative risks. Translates cutting-edge neurology into actionable daily protocols: leveraging slow-wave sleep for glymphatic waste clearance, cellular proteostasis maintenance, the hybrid MIND nutritional architecture, and vascular-brain optimization.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 5-Part Longevity Architecture</summary>
+          <ul class="chapter-list">
+            <li><strong>Part I: The Crisis of Cognitive Slippage:</strong> Detecting subtle slippage, oxidative saboteurs, and the vascular-brain link.</li>
+            <li><strong>Part II: The Insight:</strong> The Glymphatic System (your brain's nighttime waste cleanup crew) and proteostasis defenses.</li>
+            <li><strong>Part III: The System:</strong> The MIND Diet blueprint (9 essentials to add, 5 to limit) and sleep posture protocols.</li>
+            <li><strong>Part IV: Execution:</strong> The Social Brain, cognitive reserve development, and the 150-minute aerobic rule.</li>
+            <li><strong>Part V: Personal Operating Manual:</strong> Tailored habit tracking and lifetime cognitive dashboards.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-cognitive-vitality.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-cognitive-vitality.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 4: The Architecture of Tolerance -->
+    <article class="book-card" data-category="systems-mindset">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 04</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-handshake-angle"></i></div>
+          <div>
+            <div class="cover-main-title">Architecture of Tolerance</div>
+            <div class="cover-sub-label">Pluralistic Systems</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-users"></i> Societal Architecture</span>
+          <span class="status-badge">Complete 8-Chapter Blueprint</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">The Architecture of Tolerance</h2>
+        <h3 class="book-subtitle">Systems Thinking for a Pluralistic Society: Beyond Belief and Non-Belief</h3>
+        <p class="book-description">Pivots away from soft, passive endurance toward an active, structural commitment to human dignity in an increasingly polarized world. Treats cultural and ideological clashes not as personal moral failures, but as technical design bottlenecks of interoperability. Bridges the secular and sacred, unlinks morality from theological dogma, and codifies where tolerance must draw firm boundaries against coercion.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 3-Part Systems Framework</summary>
+          <ul class="chapter-list">
+            <li><strong>Part I: Core Architecture of Respect:</strong> Active commitments, separating the person from the paradigm, and reciprocity requirements.</li>
+            <li><strong>Part II: Bridging Secular & Sacred:</strong> Updating outdated interface models, unlinking morality from theology, and validating secular humanism.</li>
+            <li><strong>Part III: Establishing Functional Boundaries:</strong> Protecting freedom of discourse and identifying the precise threshold where tolerance ends and intimidation begins.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-architecture-of-tolerance.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-architecture-of-tolerance.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- ========================================== -->
+    <!-- SECTION 5: NON-ASSET BUSINESS OPERATIONS   -->
+    <!-- ========================================== -->
+    <div class="library-section-header" data-category="business-ops">
+      <h2><i class="fa-solid fa-cubes-stacked"></i> Non-Asset Business Operations</h2>
+      <span class="section-tag">High-Margin Coordination Models</span>
+    </div>
+
+    <!-- BOOK 8: Zero-Asset Logistics -->
+    <article class="book-card" data-category="business-ops">
+      <div class="cover-container">
+        <div class="cyber-cover">
+          <div class="cover-top-tag">Book 08</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-truck"></i></div>
+          <div>
+            <div class="cover-main-title">Zero-Asset Logistics</div>
+            <div class="cover-sub-label">Freight Dispatch Manual</div>
+          </div>
+          <div class="cover-author-tag">Boniface Mutua Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-route"></i> Non-Asset Freight</span>
+          <span class="status-badge">Complete Manuscript & SOP</span>
+        </div>
+        <div class="author-line">By <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">Zero-Asset Logistics</h2>
+        <h3 class="book-subtitle">The Step-by-Step Guide to Launching a Profitable U.S. Truck Dispatch Business from Home</h3>
+        <p class="book-description">Unlocks the multi-trillion-dollar freight supply chain without buying $180,000 trucks or posting a $75,000 broker bond. Operates strictly under FMCSA guidelines as a legal 'bona fide agent,' coordinating freight between owner-operators and top brokerages to capture 5%–10% gross load pay. Includes complete carrier onboarding templates, rate negotiation scripts, and remote tech stack architectures.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 4-Module Freight Blueprint</summary>
+          <ul class="chapter-list">
+            <li><strong>Module I: Non-Asset Freight Architecture:</strong> Supply chain margin distribution and the legal 'Bona Fide Agent' framework.</li>
+            <li><strong>Module II: Equipment Classes:</strong> 53' Dry Van, Reefer, Flatbed dynamics, and high-CPM lane selection.</li>
+            <li><strong>Module III: Carrier Sourcing & Dispatch Desk:</strong> Mining FMCSA SAFER databases, Limited Power of Attorney (LPOA) execution, and rate confirmations.</li>
+            <li><strong>Module IV: Cash Flow & Scaling:</strong> Freight factoring split-pays, load board spot negotiation (DAT, Truckstop), and scaling to dedicated lanes.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-zero-asset-logistics.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-zero-asset-logistics.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <footer class="storefront-footer">
+      <p>© 2026 MindReset Architect. All rights reserved. Codified Intellectual Property of Boniface Mutua Muthini.</p>
+      <p style="margin-top: 6px;"><a href="index.html">Return to Master Blueprint System</a> • <a href="https://mindreset-architect.kit.com/f996b655b6" target="_blank">Newsletter & IP Alerts</a></p>
+    </footer>
+
+  </main>
+
+  <!-- INTERACTIVE FILTERING SCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. DYNAMIC BOOK COUNTER ENGINE
+      const totalBooks = document.querySelectorAll('.book-card').length;
+      document.getElementById('dynamic-book-count').innerText = totalBooks;
+
+      // 2. EXISTING FILTER LOGIC BELOW...
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const bookCards = document.querySelectorAll('.book-card');
+      const sectionHeaders = document.querySelectorAll('.library-section-header');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+
+          bookCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            if (filterValue === 'all' || cardCategory === filterValue) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          sectionHeaders.forEach(header => {
+            const headerCategory = header.getAttribute('data-category');
+            if (filterValue === 'all' || headerCategory === filterValue) {
+              header.style.display = 'flex';
+            } else {
+              header.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
