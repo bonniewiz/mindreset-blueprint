@@ -37,11 +37,18 @@
       padding: 60px 20px 100px;
     }
 
+    /* Dual Navigation Layout */
+    .top-nav-menu {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
     .nav-back {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 35px;
       color: #a855f7;
       text-decoration: none;
       font-weight: 600;
@@ -528,7 +535,8 @@
       font-size: 0.85rem;
     }
 
-    .storefront-footer a { color: #00f0ff; text-decoration: none; }
+    .storefront-footer a { color: #00f0ff; text-decoration: none; margin: 0 5px; }
+    .storefront-footer a:hover { color: #ffffff; }
 
     @media (max-width: 768px) {
       .storefront-container { padding: 40px 15px; }
@@ -545,8 +553,10 @@
       .badge-row { justify-content: center; }
       .btn-row { justify-content: center; }
       .chapter-details { text-align: left; }
+      .top-nav-menu { flex-direction: column; gap: 15px; }
     }
-	@keyframes bounce {
+    
+    @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-5px); }
       60% { transform: translateY(-3px); }
@@ -556,7 +566,13 @@
 <body>
 
   <main class="storefront-container">
-    <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Return to Master Blueprint</a>
+    
+    <!-- Top Navigation Menu -->
+    <nav class="top-nav-menu">
+      <a href="index.html" class="nav-back"><i class="fa-solid fa-map"></i> Return to Master Blueprint</a>
+      <a href="about-the-authors.html" class="nav-back"><i class="fa-solid fa-pen-nib"></i> About The Authors</a>
+      <a href="https://www.amazon.com/author/mindresetarchitect" target="_blank" rel="noopener noreferrer" class="nav-back"><i class="fa-brands fa-amazon"></i> Amazon KDP Bookshelf</a>
+    </nav>
     
     <header class="header-section">
       <div class="header-badge"><i class="fa-solid fa-shield-halved"></i> Proprietary IP Ecosystem</div>
@@ -977,8 +993,50 @@
       <span class="section-tag">Zero-Friction Behavioral Systems</span>
     </div>
 
-    <!-- BOOK 10: Money on Autopilot -->
+    <!-- NEW BOOK: Set It and Grow -->
     <article class="book-card featured-card" data-category="personal-finance">
+      <div class="cover-container">
+        <img src="images/cover-set-it-and-grow.jpg" alt="Set It and Grow Cover" class="book-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cyber-cover" style="display:none;">
+          <div class="cover-top-tag">New Release</div>
+          <div class="cover-icon-wrap"><i class="fa-solid fa-money-bill-transfer"></i></div>
+          <div>
+            <div class="cover-main-title">Set It and Grow</div>
+            <div class="cover-sub-label">Automated Wealth</div>
+          </div>
+          <div class="cover-author-tag">Wanga & Muthini</div>
+        </div>
+      </div>
+      <div class="book-info">
+        <div class="badge-row">
+          <span class="node-badge"><i class="fa-solid fa-cogs"></i> Automated Systems</span>
+          <span class="status-badge">Complete Manuscript</span>
+        </div>
+        <div class="author-line">By <span>Judith Mbinya Wanga</span> & <span>Boniface Mutua Muthini</span> | MindReset Architect Books</div>
+        <h2 class="book-title">Set It and Grow</h2>
+        <h3 class="book-subtitle">How to Build a Bulletproof Money System That Saves and Invests for You While You Sleep</h3>
+        <p class="book-description">Rejects the idea that you need to be a perfectly disciplined financial robot. This manual is a step-by-step guide to removing human error from personal finance by setting up automated cash-flow systems. Design banking architectures that act as invisible funnels, routing your money mathematically to the right places the exact second you get paid.</p>
+        
+        <details class="chapter-details">
+          <summary><i class="fa-solid fa-list-check"></i> 5-Phase Automation Blueprint</summary>
+          <ul class="chapter-list">
+            <li><strong>Phase 1: Problem:</strong> The Willpower Trap and identifying financial leaks.</li>
+            <li><strong>Phase 2: Insight:</strong> Designing the Invisible Funnel and making wealth accumulation the default path of least resistance.</li>
+            <li><strong>Phase 3: System:</strong> The Three-Account Foundation and setting up the Paycheck Trapdoor.</li>
+            <li><strong>Phase 4: Execution:</strong> The Autopilot Investment Machine, automating debt demolition, and capturing the upside.</li>
+            <li><strong>Phase 5: Outcome:</strong> The 60-Minute Annual Review and the freedom of guilt-free spending.</li>
+          </ul>
+        </details>
+
+        <div class="btn-row">
+          <a href="preview-set-it-and-grow.html" class="btn-amazon"><i class="fa-brands fa-amazon"></i> Secure on Amazon</a>
+          <a href="preview-set-it-and-grow.html" class="btn-blueprint"><i class="fa-solid fa-microscope"></i> Preview Framework</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BOOK 10: Money on Autopilot -->
+    <article class="book-card" data-category="personal-finance">
       <div class="cover-container">
         <img src="images/cover-autopilot.png" alt="Money on Autopilot Cover" class="book-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="cyber-cover" style="display:none;">
@@ -1281,7 +1339,12 @@
 
     <footer class="storefront-footer">
       <p>© 2026 MindReset Architect. All rights reserved. Codified Intellectual Property of Boniface Mutua Muthini.</p>
-      <p style="margin-top: 6px;"><a href="index.html">Return to Master Blueprint System</a> • <a href="https://mindreset-architect.kit.com/f996b655b6" target="_blank">Newsletter & IP Alerts</a></p>
+      <p style="margin-top: 6px;">
+        <a href="index.html">Return to Master Blueprint System</a> • 
+        <a href="about-the-authors.html">About The Authors</a> • 
+        <a href="https://www.amazon.com/author/mindresetarchitect" target="_blank" rel="noopener noreferrer">Amazon KDP Bookshelf</a> • 
+        <a href="https://mindreset-architect.kit.com/f996b655b6" target="_blank">Newsletter & IP Alerts</a>
+      </p>
     </footer>
 
   </main>

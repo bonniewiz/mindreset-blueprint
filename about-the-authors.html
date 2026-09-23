@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the Authors | MindReset Architect</title>
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* 1. GLOBAL ARCHITECTURE & GRID */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: #050A1F; 
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+      background-position: center top;
+      background-attachment: fixed;
+      color: #e0e6ed;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+    }
+
+    .preview-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+    }
+
+    /* Dual Navigation Layout */
+    .top-nav-menu {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .nav-back:hover { color: #00f0ff; transform: translateX(-5px); }
+
+    /* 2. GLASSMORPHISM CONTENT BLOCKS */
+    .framework-block {
+      background-color: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .framework-block::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 240, 255, 0.05), transparent 60%);
+      pointer-events: none;
+    }
+
+    .block-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+    }
+
+    .block-header i { color: #00f0ff; }
+
+    /* Text & Typography */
+    .framework-block p {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      text-align: justify;
+    }
+
+    .blueprint-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .blueprint-list li {
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+    }
+
+    .blueprint-list li i {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      color: #a855f7;
+      font-size: 1.2rem;
+    }
+
+    .blueprint-list strong {
+      color: #00f0ff;
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    /* 3. PROFILE GRID & STYLING */
+    .authors-grid {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .author-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(0, 240, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      padding: 20px;
+      border-radius: 12px;
+      flex: 1;
+      min-width: 280px;
+    }
+    
+    /* Google Profile Style Circle with Neon Frame */
+    .author-img {
+      width: 90px;
+      height: 90px; 
+      object-fit: cover;
+      border-radius: 50%; /* Perfect Circle */
+      border: 2px solid #a855f7; /* Electric Purple */
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+    }
+    
+    .author-info h4 {
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .author-info p {
+      color: #00f0ff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0;
+    }
+    
+    /* Channel Link Styling */
+    .channel-link {
+      color: #00f0ff;
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px dashed rgba(0, 240, 255, 0.5);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .channel-link:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .framework-block { padding: 30px 20px; }
+      .authors-grid { gap: 20px; }
+      .top-nav-menu { flex-direction: column; gap: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="preview-container">
+    
+    <!-- Top Navigation Menu -->
+    <nav class="top-nav-menu">
+      <a href="index.html" class="nav-back"><i class="fa-solid fa-map"></i> Return to Master Blueprint</a>
+      <a href="library.html" class="nav-back"><i class="fa-solid fa-book-open"></i> Return to The Library</a>
+      <a href="https://www.amazon.com/author/mindresetarchitect" target="_blank" rel="noopener noreferrer" class="nav-back"><i class="fa-brands fa-amazon"></i> Amazon KDP Bookshelf</a>
+    </nav>
+
+    <!-- ABOUT THE AUTHORS SECTION -->
+    <section class="framework-block">
+      <h2 class="block-header"><i class="fa-solid fa-pen-nib"></i> ABOUT THE AUTHORS</h2>
+
+      <!-- PASSPORT PROFILE GRID -->
+      <div class="authors-grid">
+        
+        <!-- Author 1: Boniface -->
+        <div class="author-card">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocLDAtTuZYwlUCeJ2d0K0YTAbv0DfAkeIWAp3lX7SsGHsEx2ef4E=s40-cc-rp" alt="Boniface Mutua Muthini" class="author-img" onerror="this.src='images/placeholder-avatar.png'">
+          <div class="author-info">
+            <h4>Boniface Mutua Muthini</h4>
+            <p>Systems Architect & Co-Founder</p>
+          </div>
+        </div>
+
+        <!-- Author 2: Judith -->
+        <div class="author-card">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocLAlJkmcQ2eYj0B-rcwja0sxu4I2133BYR8uz8xo3dR1dJP0gtQ=s40-cc-rp" alt="Judith Mbinya Wanga" class="author-img" onerror="this.src='images/placeholder-avatar.png'">
+          <div class="author-info">
+            <h4>Judith Mbinya Wanga</h4>
+            <p>Co-Founder & Author</p>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- BIOGRAPHY TEXT -->
+      <p>Boniface Mutua Muthini and Judith Mbinya Wanga are the co-founders of MindReset Architect Books, a publishing platform dedicated to empowering readers with practical financial knowledge and life strategies. This is also part of their <a href="https://www.youtube.com/@MindResetArchitect" class="channel-link" target="_blank" rel="noopener noreferrer">MindReset Architect YouTube Channel</a> brand.</p>
+      
+      <p>Their journey began in the classroom, where both served as educators between 2005 and 2010. This shared background in teaching instilled in them a deep commitment to making complex information accessible, clear, and actionable. Transitioning from education into the fast-paced world of digital marketing, business entrepreneurship, and investment, they have spent the years since applying these lessons in the real economy. Their combined experience bridges the gap between theory and practice, offering readers strategies that are not just mathematically sound but realistic for everyday life.</p>
+      
+      <h3 style="color: #ffffff; font-family: 'Space Grotesk', sans-serif; margin: 35px 0 20px; font-size: 1.3rem;">Also by Boniface Mutua Muthini & Judith Mbinya Wanga</h3>
+      
+      <ul class="blueprint-list">
+        <li><i class="fa-solid fa-book"></i> <strong>The MindReset Architect System™</strong> The overarching master framework for turning learning, research, and problem-solving into compounding businesses[cite: 8].</li>
+        <li><i class="fa-solid fa-book"></i> <strong>MindReset Architect (Series Book 01)</strong> The core manifesto focused on escaping the 9-to-5 linear labor trap by engineering asymmetric systems.</li>
+        <li><i class="fa-solid fa-book"></i> <strong>The Asymmetric Media Engine (Series Book 02)</strong> Treating a YouTube channel as an automated army of digital employees working 24/7[cite: 8].</li>
+        <li><i class="fa-solid fa-book"></i> <strong>The AI Accelerator (Series Book 03)</strong> Utilizing AI and "vibe coding" to bypass traditional computer science barriers.</li>
+        <li><i class="fa-solid fa-book"></i> <strong>The Internal Discipline Engine (Series Book 04)</strong> The psychological operating system that replaces exhaustible willpower with frictionless environmental design[cite: 9].</li>
+        <li><i class="fa-solid fa-book"></i> <strong>The Seven Laws of Wealth Engineering</strong> Replacing the outdated middle-class rulebook with the unbreakable physical laws of capital.</li>
+        <li><i class="fa-solid fa-book"></i> <strong>Money on Autopilot</strong> A budget-free wealth system that relies on automated digital plumbing to seamlessly route capital.</li>
+        <li><i class="fa-solid fa-book"></i> <strong>The Leverage Equation</strong> Deconstructing the structural levers of scale to build exponential wealth without downside risk.</li>
+        <li><i class="fa-solid fa-book"></i> <strong>The Wealth Algorithm: Real Estate Edition</strong> A strict, data-driven protocol treating multifamily real estate purely as a high-yield capital allocation machine.</li>
+      </ul>
+
+      <p style="margin-top: 30px; font-style: italic; color: #94a3b8; font-size: 0.95rem;">
+        Together, Judith and Boniface continue to write and publish resources designed to help individuals regain control of their financial futures, regardless of where they are starting from.<br><br>
+        <span style="color: #00f0ff;">Last Updated: September 23, 2026</span>
+      </p>
+
+    </section>
+
+  </main>
+</body>
+</html>
