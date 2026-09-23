@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The MindReset Architect System™</title>
+  <title>The MindReset Architect System&trade;</title>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Google Fonts -->
@@ -121,7 +121,43 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 0 0 0;
+      padding: 0;
+    }
+
+    /* NEW: Sticky Top Navigation */
+    .sticky-top-nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(5, 10, 31, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 16px 30px;
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      margin-bottom: 40px; /* Space before the cover page */
+    }
+
+    .sticky-top-nav a {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .sticky-top-nav a:hover {
+      color: #00f0ff;
+      transform: translateY(-2px);
     }
 
     /* A4 Web Page Section Layout */
@@ -403,8 +439,8 @@
         background: none;
         padding: 0;
       }
-      .sidebar, .global-footer {
-        display: none !important; /* Forces the sidebar and footer to hide when saving to PDF */
+      .sidebar, .sticky-top-nav, .global-footer {
+        display: none !important; /* Hide navigation elements when saving to PDF */
       }
       .content-wrapper {
         margin-left: 0;
@@ -462,7 +498,20 @@
       .content-wrapper {
         margin-left: 0;
         width: 100%;
-        padding: 20px 10px 0 10px;
+        padding: 0;
+      }
+
+      /* Adjust Sticky Nav for Mobile */
+      .sticky-top-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 12px 15px;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .sticky-top-nav a {
+        font-size: 0.8rem;
       }
       
       /* Override the strict A4 sizing to fit mobile screens perfectly */
@@ -521,10 +570,25 @@
         <a href="#invitation"><i class="fa-solid fa-paper-plane"></i> The Invitation</a>
       </li>
     </ul>
+
+    <!-- NEW: Quick Links added to the left sidebar -->
+    <h3 style="margin-top: 40px;">Quick Links</h3>
+    <ul>
+      <li><a href="library.html"><i class="fa-solid fa-book-open"></i> The Library</a></li>
+      <li><a href="about-the-authors.html"><i class="fa-solid fa-pen-nib"></i> About The Authors</a></li>
+      <li><a href="https://www.amazon.com/author/mindresetarchitect" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-amazon"></i> Amazon Bookshelf</a></li>
+    </ul>
   </nav>
 
   <!-- CONTENT WRAPPER -->
   <main class="content-wrapper">
+
+    <!-- NEW: STICKY TOP NAVIGATION -->
+    <nav class="sticky-top-nav">
+      <a href="library.html"><i class="fa-solid fa-book-open"></i> The Library</a>
+      <a href="about-the-authors.html"><i class="fa-solid fa-pen-nib"></i> About The Authors</a>
+      <a href="https://www.amazon.com/author/mindresetarchitect" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-amazon"></i> Amazon Bookshelf</a>
+    </nav>
 
     <!-- PAGE 1: COVER -->
     <section class="a4-page cover-page" id="cover">
