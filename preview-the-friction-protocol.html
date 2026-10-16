@@ -191,16 +191,27 @@
       margin-bottom: 4px;
     }
 
-    /* Lab Sample Custom Formatting */
+    /* Lab Sample Custom Formatting (Physical Book Aesthetic) */
     .lab-sample-text {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
+      background-color: #fdfdfc; /* Off-white book paper */
+      color: #050A1F; /* Deep dark navy text */
+      font-family: 'Georgia', 'Times New Roman', serif; /* Classic book font */
       font-size: 1.1rem;
       line-height: 1.8;
-      color: #e2e8f0;
-      border-left: 3px solid rgba(168, 85, 247, 0.5);
-      padding-left: 25px;
+      padding: 35px 40px;
       margin-top: 30px;
+      border-radius: 4px;
+      box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.03), /* Subtle paper texture shadow */
+        0 10px 25px rgba(0, 0, 0, 0.5); /* Outer drop shadow to lift it off the dark background */
+      border-left: 5px solid #a855f7; /* Keeps your brand's electric purple anchor */
+    }
+
+    /* Override the default paragraph color just for the book section */
+    .lab-sample-text p {
+      color: #050A1F;
+      margin-bottom: 20px;
+      text-align: left;
     }
 
     /* 4. EXECUTION TRIGGER (CTA) */
@@ -264,8 +275,14 @@
       
       <!-- DUAL IMAGE GRID -->
       <div class="header-image-grid">
-        <img src="images/Thumbnail_Book_14_The Friction Protocol.png" alt="The Friction Protocol Cover Thumbnail" class="preview-cover-img" onerror="this.src='images/placeholder-thumb.png'">
-        <img src="images/Mockup_Book_14_The Friction Protocol.png" alt="The Friction Protocol 3D Mockup" class="preview-cover-img mockup-img" onerror="this.src='images/placeholder-mockup.png'">
+        <!-- Links to Live eBook Amazon Page -->
+        <a href="https://www.amazon.com/dp/B0HN8HTNSP" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+          <img src="images/Thumbnail_Book_14_The Friction Protocol.png" alt="The Friction Protocol Digital Edition" class="preview-cover-img" onerror="this.src='images/placeholder-thumb.png'">
+        </a>
+        <!-- Links to Paperback Amazon Page (Currently In Review) -->
+        <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration: none;" title="Physical Manual (Currently in Review)">
+          <img src="images/Mockup_Book_14_The Friction Protocol.png" alt="The Friction Protocol Physical Manual" class="preview-cover-img mockup-img" onerror="this.src='images/placeholder-mockup.png'">
+        </a>
       </div>
       
     </header>
@@ -319,10 +336,28 @@
       </div>
     </section>
 
-    <!-- PART 4: THE EXECUTION TRIGGER -->
+    <!-- PART 4: THE LEAD MAGNET UPGRADE -->
+    <section class="framework-block" style="border-color: #a855f7;">
+      <h2 class="block-header"><i class="fa-solid fa-file-pdf"></i> Free Companion Workbook</h2>
+      <p>This manual requires analog execution. Handwriting forces deliberate neural deceleration, engaging your prefrontal cortex to process financial reality with cognitive depth that screen-tapping cannot match.</p>
+      <p>Download the free 9-page printable <strong>Friction Protocol Companion Workbook</strong>, featuring the Dopamine Tax Balance Sheet, the 72-Hour Sanctuary Buffer log, and the Asset Acceleration Audit.</p>
+      <a href="https://mindreset-architect.kit.com/27db2e3b9a" class="nav-back" style="margin-top: 15px; margin-bottom: 0; font-size: 1.1rem;"><i class="fa-solid fa-download"></i> SECURE THE PRINTABLE WORKBOOK</a>
+    </section>
+	
+	<!-- PART 5: THE EXECUTION TRIGGER -->
     <div class="cta-container">
       <h2>The Blueprint is Drawn. It is Time to Build.</h2>
-      <a href="#" class="btn-amazon"><i class="fa-brands fa-amazon"></i> SECURE THE COMPLETE MANUAL ON AMAZON</a>
+      
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+        <!-- Live eBook CTA -->
+        <a href="https://www.amazon.com/dp/B0HN8HTNSP" target="_blank" rel="noopener noreferrer" class="btn-amazon" style="background: rgba(10, 14, 26, 0.85); color: #00f0ff; border: 1px solid #00f0ff;">
+          <i class="fa-brands fa-amazon"></i> SECURE DIGITAL EDITION
+        </a>
+        <!-- Paperback CTA (Currently In Review) -->
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-amazon" title="Physical Manual (Currently in Review)">
+          <i class="fa-solid fa-book-open"></i> SECURE PHYSICAL MANUAL
+        </a>
+      </div>
     </div>
 
   </main>
